@@ -1,0 +1,136 @@
+<div class="col-md-6">
+    <h4>Formateurs </h4>
+</div>
+
+  <table class="table">
+    <thead >
+      <tr style="text-align: center;">
+        <th scope="col">ID Formateur</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
+        <th scope="col">Type</th>
+        <th scope="col">Organisme</th>
+        
+
+      
+      </tr>
+    </thead>
+    <tbody  *ngFor="let formateur of formateurs; let i = index">
+      <tr style="align-items: center; text-align: center;">
+        <th>{{ formateur.idFormateur }}</th>
+        <td>{{ formateur.nom }}</td>
+        <td>{{ formateur.prenom }}</td>
+        <td>{{ formateur.email }}</td>
+        <td>{{ formateur.tel }}</td>
+        <td>{{ formateur.type }}</td>
+        <td>{{ formateur.organisme.libelle }}</td>
+        
+       
+        <td>  <button class="btn btn-primary"(click)="open2(content2,formateur.idFormateur)" > modifier</button>
+          <button class="btn btn-danger" (click)="del(formateur.idFormateur)"> Supprimer</button></td>
+
+      </tr>
+     
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Formateur</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="FormateurForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nom</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir prenom</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" formControlName="prenom" placeholder="Prenom">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Email</label>
+            <input type="email" class="form-control" id="formGroupExampleInput" formControlName="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir le type</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" formControlName="type" placeholder="Type">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Numéro de téléphone</label>
+            <input type="tel" class="form-control" id="formGroupExampleInput" formControlName="tel" placeholder="telephone">
+          </div>
+          <label for="formGroupExampleInput">Choisir organisme</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+              <option value="">Choisir organisme</option>
+              <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+              </option>
+           </select>
+           </div>
+           
+           
+          
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success" (click)="add()" (click)="modal.close('Save click')">Ajouter</button>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #content2 let-modal2>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal2-basic-title">Modifier Formateur</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal2.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="FormateurForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nouveau Nom</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Prénom</label>
+            <input type="text" class="form-control" id="formGroupExampleInput"  formControlName="prenom" placeholder="Prenom">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau email</label>
+            <input type="email" class="form-control" id="formGroupExampleInput" formControlName="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouvleau Numéro de Tel</label>
+            <input type="tel" class="form-control" id="formGroupExampleInput" formControlName="tel" placeholder="Tel">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Type</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" formControlName="type" placeholder="Type">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau organisme</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+              <option value="">Choisir organisme</option>
+              <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+              </option>
+           </select>
+          </div>
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal2.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success"(click)="update(this.index)" (click)="modal2.close('Save click')">Modifier</button>
+    </div>
+  
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ajouter Formateur </button>
+  
+ 

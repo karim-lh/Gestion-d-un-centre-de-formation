@@ -1,0 +1,162 @@
+<div class="col-md-6">
+    <h4>Participants </h4>
+</div>
+
+  <table class="table">
+    <thead >
+      <tr style="text-align: center;">
+        <th scope="col">ID Participant</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
+        <th scope="col">Profil</th>
+        <th scope="col">Pays</th>
+        <th scope="col">Organisme</th>
+        
+
+      
+      </tr>
+    </thead>
+    <tbody  *ngFor="let participant of participants; let i = index">
+      <tr style="align-items: center; text-align: center;">
+        <th>{{ participant.idParticipant }}</th>
+        <td>{{ participant.nom }}</td>
+        <td>{{ participant.prenom }}</td>
+        <td>{{ participant.email }}</td>
+        <td>{{ participant.tel }}</td>
+        <td>{{ participant.profil.libelle }}</td>
+        <td>{{ participant.pays.libelle }}</td>
+        <td>{{ participant.organisme.libelle }}</td>
+        
+       
+        <td>  <button class="btn btn-primary"(click)="open2(content2,participant.idParticipant)" > modifier</button>
+          <button class="btn btn-danger" (click)="del(participant.idParticipant)"> Supprimer</button></td>
+
+      </tr>
+     
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Participant</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="ParticipantForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nom</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir prenom</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" formControlName="prenom" placeholder="Prenom">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Email</label>
+            <input type="email" class="form-control" id="formGroupExampleInput" formControlName="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Numéro de téléphone</label>
+            <input type="tel" class="form-control" id="formGroupExampleInput" formControlName="tel" placeholder="telephone">
+          </div>
+          <label for="formGroupExampleInput">Choisir profil</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="profil">
+              <option value="">Choisir profil</option>
+              <option *ngFor="let profil of profils"  [ngValue]="profil">{{profil.libelle}}
+              </option>
+           </select>
+          </div>
+           <label for="formGroupExampleInput">Choisir pays</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="pays">
+              <option value="">Choisir pays</option>
+              <option *ngFor="let pays of payss"  [ngValue]="pays">{{pays.libelle}}
+              </option>
+           </select>
+          </div>
+           <label for="formGroupExampleInput">Choisir organisme</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+              <option value="">Choisir organisme</option>
+              <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+              </option>
+           </select>
+           </div>
+           
+           
+          
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success" (click)="add()" (click)="modal.close('Save click')">Ajouter</button>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #content2 let-modal2>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal2-basic-title">Modifier Participant</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal2.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="ParticipantForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nouveau Nom</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="nom" placeholder="Nom">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Prénom</label>
+            <input type="text" class="form-control" id="formGroupExampleInput"  formControlName="prenom" placeholder="Prenom">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau email</label>
+            <input type="email" class="form-control" id="formGroupExampleInput" formControlName="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau Numéro de Tel</label>
+            <input type="tel" class="form-control" id="formGroupExampleInput" formControlName="tel" placeholder="Tel">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau profil</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="profil">
+                <option value="">Choisir profil</option>
+                <option *ngFor="let profil of profils"  [ngValue]="profil">{{profil.libelle}}
+                </option>
+             </select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau pays</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="pays">
+                <option value="">Choisir pays</option>
+                <option *ngFor="let pays of payss"  [ngValue]="pays">{{pays.libelle}}
+                </option>
+             </select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau organisme</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+                <option value="">Choisir organisme</option>
+                <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+                </option>
+             </select>
+          </div>
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal2.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success"(click)="update(this.index)" (click)="modal2.close('Save click')">Modifier</button>
+    </div>
+  
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ajouter Participant </button>
+  
+ 

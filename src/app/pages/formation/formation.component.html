@@ -1,0 +1,151 @@
+<div class="col-md-6">
+    <h4>Formations </h4>
+</div>
+
+  <table class="table">
+    <thead >
+      <tr style="text-align: center;">
+        <th scope="col">ID Formation</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Type de formation</th>
+        <th scope="col">Nombre de session</th>
+        <th scope="col">Durée</th>
+        <th scope="col">Budget</th>
+        <th scope="col">Domaine</th>
+        <th scope="col">Lieu de la session</th>
+
+      
+      </tr>
+    </thead>
+    <tbody  *ngFor="let formation of formations; let i = index">
+      <tr style="align-items: center; text-align: center;">
+        <th>{{ formation.idFormation }}</th>
+        <td>{{ formation.titre }}</td>
+        <td>{{ formation.type_formation }}</td>
+        <td>{{ formation.nb_session }}</td>
+        <td>{{ formation.duree }}</td>
+        <td>{{ formation.budget }}</td>
+        <td>{{ formation.domaine.libelle }}</td>
+        <td>{{ formation.sessionformations.lieu }}</td>
+       
+        <td>  <button class="btn btn-primary"(click)="open2(content2,formation.idFormation)" > modifier</button>
+          <button class="btn btn-danger" (click)="del(formation.idFormation)"> Supprimer</button></td>
+
+      </tr>
+     
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Formation</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="FormationForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Titre</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="titre" placeholder="titre">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir type de formation</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" formControlName="type_formation" placeholder="type">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nombre de session</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="nb_session" placeholder="nbsession">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir la durée</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="duree" placeholder="duree">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir budget</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="budget" placeholder="budget">
+          </div>
+          <label for="formGroupExampleInput">Choisir domaine</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="domaine">
+              <option value="">Choisir domaine</option>
+              <option *ngFor="let domaine of domaines"  [ngValue]="domaine">{{domaine.libelle}}
+              </option>
+           </select>
+           </div>
+           <label for="formGroupExampleInput">Choisir Session</label>
+           <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="sessionformations">
+              <option value="">Choisir Session</option>
+              <option *ngFor="let session of sessions"  [ngValue]="session">{{session.lieu}}
+              </option>
+           </select>
+           </div>
+          
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success" (click)="add()" (click)="modal.close('Save click')">Ajouter</button>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #content2 let-modal2>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal2-basic-title">Modifier Formation</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal2.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="FormationForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nouveau Titre</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="titre" placeholder="titre">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Type de formation</label>
+            <input type="text" class="form-control" id="formGroupExampleInput"  formControlName="type_formation" placeholder="type">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau nombre de formation</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="nb_session" placeholder="nbsession">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouvelle durée</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="duree" placeholder="duree">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Budget</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="budget" placeholder="budget">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Domaine</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="domaine">
+              <option value="">Choisir domaine</option>
+              <option *ngFor="let domaine of domaines"  [ngValue]="domaine">{{domaine.libelle}}
+              </option>
+           </select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouvelle Session</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="sessionformations">
+              <option value="">Choisir Session</option>
+              <option *ngFor="let session of sessions"  [ngValue]="session">{{session.lieu}}
+              </option>
+           </select>
+          </div>
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal2.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success"(click)="update(this.index)" (click)="modal2.close('Save click')">Modifier</button>
+    </div>
+  
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ajouter Formation </button>
+  
+ 
+  

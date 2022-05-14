@@ -1,0 +1,165 @@
+<div class="col-md-6">
+    <h4>Session de Formations </h4>
+</div>
+
+  <table class="table">
+    <thead >
+      <tr style="text-align: center;">
+        <th scope="col">ID Session</th>
+        <th scope="col">Lieu</th>
+        <th scope="col">Nombre Participant</th>
+        <th scope="col">Date début</th>
+        <th scope="col">Date Fin</th>
+        <th scope="col">Formateur</th>
+        <th scope="col">Organisme</th>
+       <th scope="col">Liste des participants</th>
+        <th scope="col">Actions</th>
+
+      
+      </tr>
+    </thead>
+    <tbody  *ngFor="let Sformation of Sformations; let i = index">
+      <tr style="align-items: center; text-align: center;">
+        <th>{{ Sformation.idSession }}</th>
+        <td>{{ Sformation.lieu }}</td>
+        <td>{{ Sformation.nb_participant }}</td>
+        <td>{{ Sformation.dateDebut }}</td>
+        <td>{{ Sformation.dateFin }}</td>
+        <td>{{ Sformation?.formateur?.email }}</td>
+        <td>{{ Sformation.organisme.libelle }}</td>
+        <td> 
+          <div *ngFor="let participant of Sformation.participantList">
+          <h5>{{participant.email}}</h5>
+        </div>
+       </td>
+       
+        <td>  <button class="btn btn-primary"(click)="open2(content2,Sformation.idSession)" > modifier</button>
+          <button class="btn btn-danger" (click)="del(Sformation.idSession)"> Supprimer</button></td>
+
+      </tr>
+     
+    </tbody>
+  </table>
+  <ng-template #content let-modal >
+    <div class="modal-header" >
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Session de Formation</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="SFormationForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Lieu</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="lieu" placeholder="Lieu">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nombre de participants</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" formControlName="nb_participant" placeholder="nbparticipant">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Date Début</label>
+            <input type="date" class="form-control" id="formGroupExampleInput" formControlName="dateDebut" placeholder="Debut">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Date Fin</label>
+            <input type="date" class="form-control" id="formGroupExampleInput" formControlName="dateFin" placeholder="Fin">
+          </div>
+          
+          <label for="formGroupExampleInput">Choisir Formateur</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="formateur">
+              <option value="">Choisir Formateur</option>
+              <option *ngFor="let formateur of formateurs"  [ngValue]="formateur">{{formateur.email}}
+              </option>
+            </select>
+          </div> 
+              <label for="formGroupExampleInput">Choisir organisme</label>
+          <div class="input-group mb-3">
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+              <option value="">Choisir organisme</option>
+              <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+              </option>
+           </select>
+           </div>  
+           <label for="formGroupExampleInput">Choisir liste des Participant</label>
+           <div class="input-group mb-3">
+             <select class="form-control" id="formGroupExampleInput" formControlName="participantList" multiple>
+               <option value="">Choisir participant</option>
+               <option *ngFor="let participant of participants"  [ngValue]="participant">{{participant.email}}
+               </option>
+            </select>
+            </div>  
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success" (click)="add()" (click)="modal.close('Save click')">Ajouter</button>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #content2 let-modal2>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal2-basic-title">Modifier Session de Formation</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal2.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="SFormationForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nouveau Lieu</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="lieu" placeholder="Lieu">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouveau Nombre de participants</label>
+            <input type="number" class="form-control" id="formGroupExampleInput"  formControlName="nb_participant" placeholder="nbparticipant">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouvelle date de début</label>
+            <input type="date" class="form-control" id="formGroupExampleInput" formControlName="dateDebut" placeholder="yyyy-mm-dd">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir Nouvelle date du fin</label>
+            <input type="date" class="form-control" id="formGroupExampleInput" formControlName="dateFin" placeholder="yyyy-mm-dd">
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau formateur</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="formateur">
+              <option value="">Choisir Formateur</option>
+              <option *ngFor="let formateur of formateurs"  [ngValue]="formateur">{{formateur.email}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau organisme</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="organisme">
+              <option value="">Choisir organisme</option>
+              <option *ngFor="let organisme of organismes"  [ngValue]="organisme">{{organisme.libelle}}
+              </option>
+           </select>
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Saisir nouveau participant</label>
+            <select class="form-control" id="formGroupExampleInput" formControlName="participant">
+              <option value="">Choisir participant</option>
+              <option *ngFor="let participant of participants"  [ngValue]="participant">{{participant.email}}
+              </option>
+           </select>
+          </div>
+          
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal2.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success"(click)="update(this.index)" (click)="modal2.close('Save click')">Modifier</button>
+    </div>
+  
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ajouter Session de Formation </button>
+  
+ 
+  

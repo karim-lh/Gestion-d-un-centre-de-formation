@@ -1,0 +1,74 @@
+<div class="col-md-6">
+    <h4>Pays </h4>
+</div>
+
+  <table class="table">
+    <thead >
+      <tr style="text-align: center;">
+        <th scope="col">ID Pays</th>
+        <th scope="col">Libelle</th>
+        <th scope="col">Actions</th>
+      
+      </tr>
+    </thead>
+    <tbody  *ngFor="let pays of payss; let i = index">
+      <tr style="align-items: center; text-align: center;">
+        <th>{{ pays.idPays }}</th>
+        <td>{{ pays.libelle }}</td>
+        <td>  <button class="btn btn-primary"(click)="open2(content2,pays.idPays)" > modifier</button>
+          <button class="btn btn-danger" (click)="del(pays.idPays)"> Supprimer</button></td>
+
+      </tr>
+     
+    </tbody>
+  </table>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Ajouter Pays</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="PaysForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Libelle</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="libelle" placeholder="Libelle">
+        </div>
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success" (click)="add()" (click)="modal.close('Save click')">Ajouter</button>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #content2 let-modal2>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal2-basic-title">Modifier Pays</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal2.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="PaysForm">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Saisir Nouveau Libelle</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" formControlName="libelle" placeholder="Libelle">
+        </div>
+        
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="modal2.close('Save click')">Fermer</button>
+  
+   
+      <button type="button" class="btn btn-success"(click)="update(this.index)" (click)="modal2.close('Save click')">Modifier</button>
+    </div>
+  
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Ajouter Pays </button>
+  
+ 
+  

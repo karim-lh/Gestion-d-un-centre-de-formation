@@ -39,6 +39,17 @@ import {uiReducer} from './store/ui/reducer';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SelectComponent } from './components/select/select.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { DomaineComponent } from './pages/domaine/domaine.component';
+import { FormationComponent } from './pages/formation/formation.component';
+import { SessionsformationsComponent } from './pages/sessionsformations/sessionsformations.component';
+import { OrganismeComponent } from './pages/organisme/organisme.component';
+import { FormateurComponent } from './pages/formateur/formateur.component';
+import { PaysComponent } from './pages/pays/pays.component';
+import { ParticipantComponent } from './pages/participant/participant.component';
+import { ProfilComponent } from './pages/profil/profil.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 registerLocaleData(localeEn, 'en-EN');
 
@@ -69,7 +80,15 @@ registerLocaleData(localeEn, 'en-EN');
         DropdownMenuComponent,
         ControlSidebarComponent,
         SelectComponent,
-        CheckboxComponent
+        CheckboxComponent,
+        DomaineComponent,
+        FormationComponent,
+        SessionsformationsComponent,
+        OrganismeComponent,
+        FormateurComponent,
+        PaysComponent,
+        ParticipantComponent,
+        ProfilComponent
     ],
     imports: [
         BrowserModule,
@@ -78,6 +97,8 @@ registerLocaleData(localeEn, 'en-EN');
         AppRoutingModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+        MatSelectModule,
+        MatPaginatorModule,
         ToastrModule.forRoot({
             timeOut: 3000,
             positionClass: 'toast-top-right',

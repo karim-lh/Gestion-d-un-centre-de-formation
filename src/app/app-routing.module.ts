@@ -13,6 +13,14 @@ import {RecoverPasswordComponent} from '@modules/recover-password/recover-passwo
 import {PrivacyPolicyComponent} from '@modules/privacy-policy/privacy-policy.component';
 import {MainMenuComponent} from '@pages/main-menu/main-menu.component';
 import {SubMenuComponent} from '@pages/main-menu/sub-menu/sub-menu.component';
+import { DomaineComponent } from '@pages/domaine/domaine.component';
+import { FormationComponent } from '@pages/formation/formation.component';
+import { SessionsformationsComponent } from '@pages/sessionsformations/sessionsformations.component';
+import { FormateurComponent } from '@pages/formateur/formateur.component';
+import { OrganismeComponent } from '@pages/organisme/organisme.component';
+import { ProfilComponent } from '@pages/profil/profil.component';
+import { ParticipantComponent } from '@pages/participant/participant.component';
+import { PaysComponent } from '@pages/pays/pays.component';
 
 const routes: Routes = [
     {
@@ -36,6 +44,38 @@ const routes: Routes = [
             {
                 path: 'sub-menu-2',
                 component: BlankComponent
+            },
+            {
+                path: 'domaine',
+                component: DomaineComponent
+            },
+            {
+                path: 'formation',
+                component: FormationComponent
+            },
+            {
+                path: 'organisme',
+                component: OrganismeComponent
+            },
+            {
+                path: 'formateur',
+                component: FormateurComponent
+            },
+            {
+                path: 'profil',
+                component: ProfilComponent
+            },
+            {
+                path: 'participant',
+                component: ParticipantComponent
+            },
+            {
+                path: 'pays',
+                component: PaysComponent
+            },
+            {
+                path: 'sessionformation',
+                component: SessionsformationsComponent
             },
             {
                 path: '',
